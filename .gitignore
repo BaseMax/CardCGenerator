@@ -1,3 +1,5 @@
 # card-background.png
 card_generator
 card_generator.exe
+output/*.png
+output/*.jpg
