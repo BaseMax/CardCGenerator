@@ -46,10 +46,10 @@ gcc card_generator.c -o card_generator $(pkg-config --cflags --libs cairo)
 
 Ensure the following files are present in the project directory:
 
-- `card_generator.c (the main C program)
-- `card-background.png (the background image for the card)
-- `names.txt (a list of names to be included on the cards, one name per line)
-- `arial.ttf (or any other TrueType font file)
+- `card_generator.c` (the main C program)
+- `card-background.png` (the background image for the card)
+- `names.txt` (a list of names to be included on the cards, one name per line)
+- `arial.ttf` (or any other TrueType font file)
 
 #### Example Structure
 
@@ -85,8 +85,11 @@ To check the linking flags for Cairo:
 ```bash
 $ pkg-config --cflags --libs cairo
 -I/usr/include/cairo -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/uuid -I/usr/include/freetype2 -I/usr/include/libpng16 -lcairo
+```
 
 ## License
+
+Inspired by https://alixsep.github.io/yugilife/#/build
 
 This project is licensed under the GPL-3.0 License.
 
