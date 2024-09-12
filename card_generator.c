@@ -39,6 +39,7 @@ void ReadNames(char ***names, int *count) {
             fclose(file);
             exit(EXIT_FAILURE);
         }
+
         (*names)[*count] = strdup(buffer);
         if ((*names)[*count] == NULL) {
             perror("Memory allocation error");
@@ -49,50 +50,6 @@ void ReadNames(char ***names, int *count) {
     }
     fclose(file);
 }
-
-// void ReadNames(char ***names, int *count) {
-//     FILE *file = fopen(NAMES_FILE_PATH, "r");
-//     if (!file) {
-//         perror("Error opening file");
-//         exit(EXIT_FAILURE);
-//     }
-
-//     char buffer[256];
-//     *count = 0;
-//     *names = NULL;
-
-//     while (fgets(buffer, sizeof(buffer), file)) {
-//         buffer[strcspn(buffer, "\n")] = 0;
-//         for (char *p = buffer; *p; ++p) {
-//             if (*p == '\t') *p = ' ';
-//         }
-
-//         char **temp = realloc(*names, (*count + 1) * sizeof(char *));
-//         if (!temp) {
-//             perror("Error reallocating memory");
-//             for (int i = 0; i < *count; i++) {
-//                 free((*names)[i]);
-//             }
-//             free(*names);
-//             fclose(file);
-//             exit(EXIT_FAILURE);
-//         }
-//         *names = temp;
-
-//         (*names)[*count] = strdup(buffer);
-//         if (!(*names)[*count]) {
-//             perror("Error duplicating string");
-//             for (int i = 0; i < *count; i++) {
-//                 free((*names)[i]);
-//             }
-//             free(*names);
-//             fclose(file);
-//             exit(EXIT_FAILURE);
-//         }
-//         (*count)++;
-//     }
-//     fclose(file);
-// }
 
 void CardFileName(char *name, char *output_filename) {
     snprintf(output_filename, 256, "%s/card-%s.png", OUTPUT_DIR_PATH, name);
@@ -106,6 +63,7 @@ void CardFileName(char *name, char *output_filename) {
 
 void DesignCard(char *name) {
     cairo_surface_t *surface = cairo_image_surface_create_from_png(BACKGROUND_IMG_PATH);
+
     if (cairo_surface_status(surface) != CAIRO_STATUS_SUCCESS) {
         fprintf(stderr, "Error loading background image\n");
         return;
