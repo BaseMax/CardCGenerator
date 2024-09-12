@@ -84,7 +84,10 @@ void CreateCards(char **names, int count) {
 
     for (int i = 0; i < count; i++) {
         DesignCard(names[i]);
+        free(names[i]);
     }
+
+    free(names);
 }
 
 int main() {
@@ -94,12 +97,6 @@ int main() {
     ReadNames(&names, &name_count);
 
     CreateCards(names, name_count);
-
-    for (int i = 0; i < name_count; i++) {
-        free(names[i]);
-    }
-
-    free(names);
 
     return 0;
 }
