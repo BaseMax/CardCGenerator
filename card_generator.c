@@ -7,7 +7,7 @@
 
 #include FT_FREETYPE_H
 
-#define BACKGROUND_IMG_PATH "background.png"
+#define BACKGROUND_IMG_PATH "card-background.png"
 #define FONT_PATH "arial.ttf"
 #define OUTPUT_DIR_PATH "output"
 #define NAMES_FILE_PATH "names.txt"
@@ -40,8 +40,8 @@ void ReadNames(char ***names, int *count) {
     fclose(file);
 }
 
-void CertificateFileName(char *name, char *output_filename) {
-    sprintf(output_filename, "%s/certificate-%s.png", OUTPUT_DIR_PATH, name);
+void CardFileName(char *name, char *output_filename) {
+    sprintf(output_filename, "%s/card-%s.png", OUTPUT_DIR_PATH, name);
 
     for (int i = 0; output_filename[i]; i++) {
         if (output_filename[i] == ' ') {
@@ -50,7 +50,7 @@ void CertificateFileName(char *name, char *output_filename) {
     }
 }
 
-void DesignCertificate(char *name) {
+void DesignCard(char *name) {
     cairo_surface_t *surface = cairo_image_surface_create_from_png(BACKGROUND_IMG_PATH);
     cairo_t *cr = cairo_create(surface);
 
@@ -67,7 +67,7 @@ void DesignCertificate(char *name) {
     cairo_show_text(cr, name);
 
     char output_filename[256];
-    CertificateFileName(name, output_filename);
+    CardFileName(name, output_filename);
     cairo_surface_write_to_png(surface, output_filename);
 
     printf("%s generated\n", output_filename);
@@ -76,14 +76,14 @@ void DesignCertificate(char *name) {
     cairo_surface_destroy(surface);
 }
 
-void CreateCertificates(char **names, int count) {
+void CreateCards(char **names, int count) {
     struct stat st = {0};
     if (stat(OUTPUT_DIR_PATH, &st) == -1) {
         mkdir(OUTPUT_DIR_PATH, 0700);
     }
 
     for (int i = 0; i < count; i++) {
-        DesignCertificate(names[i]);
+        DesignCard(names[i]);
     }
 }
 
@@ -93,7 +93,7 @@ int main() {
 
     ReadNames(&names, &name_count);
 
-    CreateCertificates(names, name_count);
+    CreateCards(names, name_count);
 
     for (int i = 0; i < name_count; i++) {
         free(names[i]);
