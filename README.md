@@ -1,7 +1,7 @@
 # Card C Generator
 
 ```
-gcc certificate_generator.c -o certificate_generator $(pkg-config --cflags --libs cairo)
+gcc card_generator.c -o card_generator $(pkg-config --cflags --libs cairo)
 ```
 
 ## Linking
